@@ -2,42 +2,73 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <groupId>com.zhangmen</groupId>
+    <groupId>com.zhangmen.saas.extracurricula</groupId>
     <artifactId>zms-oc-cw</artifactId>
     <name>demo</name>
-    <packaging>jar</packaging>
+    <modules>
+        <module>cw-api</module>
+        <module>cw-service</module>
+    </modules>
+    <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
     <version>0.0.1-SNAPSHOT</version>
     <description>Java Project From Solar Framework</description>
 
     <parent>
         <groupId>com.zhangmen</groupId>
-        <artifactId>solar-parent</artifactId>
-        <version>3.0.10</version>
+        <artifactId>zms-oc-common</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
 
     <properties>
+        <project.version>0.0.1-SNAPSHOT</project.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <zms-oc-common.version>1.0.0-SNAPSHOT</zms-oc-common.version>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.zhangmen</groupId>
-            <artifactId>solar-framework-starter-service</artifactId>
-        </dependency>
+    <properties>
+        <project.version>0.0.1-SNAPSHOT</project.version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <zms-oc-common.version>1.0.0-SNAPSHOT</zms-oc-common.version>
+    </properties>
 
-        <dependency>
-            <groupId>com.zhangmen</groupId>
-            <artifactId>solar-component-gray-starter-service</artifactId>
-        </dependency>
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zhangmen</groupId>
+                <artifactId>zms-oc-base</artifactId>
+                <version>${zms-oc-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zhangmen</groupId>
+                <artifactId>zms-oc-mybatis</artifactId>
+                <version>${zms-oc-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zhangmen</groupId>
+                <artifactId>zms-oc-redis</artifactId>
+                <version>${zms-oc-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zhangmen</groupId>
+                <artifactId>zms-oc-swagger</artifactId>
+                <version>${zms-oc-common.version}</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <compilerArgs>
                         <arg>-parameters</arg>
@@ -47,47 +78,7 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                    <layout>JAR</layout>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <attach>false</attach>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>revision</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <dateFormat>yyyyMMdd</dateFormat>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
 </project>
